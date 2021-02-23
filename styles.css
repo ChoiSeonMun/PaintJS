@@ -7,7 +7,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 50px;
+  padding: 50px 0px;
 }
 
 canvas {
@@ -19,7 +19,6 @@ canvas {
 }
 
 .palette {
-  margin-top: 35px;
   display: flex;
 }
 
@@ -29,4 +28,29 @@ canvas {
   border-radius: 50%;
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.controls {
+  margin: 35px;
+  display: flex;
+  flex-direction: column;
+}
+
+.controls__btns {
+  margin-top: 15px;
+}
+
+.controls .controls__control {
+  width: 85px;
+  height: 30px;
+  background-color: white;
+  font-weight: bold;
+  font-size: 12px;
+  border-radius: 5px;
+  border-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.controls button:active {
+  transform: scale(0.98);
 }
