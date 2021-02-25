@@ -1,5 +1,7 @@
 const canvas = document.querySelector("canvas");
 const ctx2D = canvas.getContext("2d");
+const colors = document.getElementsByClassName("palette__color");
+
 const initialColor = "#2c2c2c";
 
 let isPainting = false;
@@ -10,21 +12,17 @@ function init() {
   canvas.width = 700;
   canvas.height = 700;
 
-  ctx2D.fillStyle = initialColor;
+  ctx2D.strokeStyle = initialColor;
   ctx2D.lineWidth = 2.5;
 
-  canvas.onmousemove = (e) => {
-    if (isPainting) {
-      const x = e.offsetX;
-      const y = e.offsetY;
+  canvas.addEventListener("mousemove", drawLine);
+  canvas.addEventListener("mousedown", startPainting);
+  canvas.addEventListener("mouseup", stopPainting);
+  canvas.addEventListener("mouseleave", stopPainting);
 
-      ctx2D.lineTo(x, y);
-      ctx2D.stroke();
-    }
-  };
-
-  canvas.onmousedown = startPainting;
-  canvas.onmouseup = canvas.onmouseleave = stopPainting;
+  for (const color of colors) {
+    color.addEventListener("click", changeColor);
+  }
 }
 
 function startPainting(e) {
@@ -39,5 +37,20 @@ function startPainting(e) {
 
 function stopPainting(e) {
   isPainting = false;
-  ctx2D.endPath();
+  ctx2D.closePath();
+}
+
+function drawLine(e) {
+  if (isPainting) {
+    const x = e.offsetX;
+    const y = e.offsetY;
+
+    ctx2D.lineTo(x, y);
+    ctx2D.stroke();
+  }
+}
+
+function changeColor(e) {
+  const color = e.target.style.backgroundColor;
+  ctx2D.strokeStyle = color;
 }
