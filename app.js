@@ -19,6 +19,10 @@ function init() {
   canvas.width = 700;
   canvas.height = 700;
 
+  // for white background
+  ctx2D.fillStyle = "white";
+  ctx2D.fillRect(0, 0, canvas.width, canvas.height);
+
   ctx2D.fillStyle = initialColor;
   ctx2D.strokeStyle = initialColor;
   ctx2D.lineWidth = brushRange.getAttribute("value");
