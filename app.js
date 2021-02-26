@@ -1,6 +1,7 @@
 const canvas = document.querySelector("canvas");
 const ctx2D = canvas.getContext("2d");
 const colors = document.getElementsByClassName("palette__color");
+const brushRange = document.querySelector(".controls input");
 
 const initialColor = "#2c2c2c";
 
@@ -13,7 +14,7 @@ function init() {
   canvas.height = 700;
 
   ctx2D.strokeStyle = initialColor;
-  ctx2D.lineWidth = 2.5;
+  ctx2D.lineWidth = brushRange.getAttribute("value");
 
   canvas.addEventListener("mousemove", drawLine);
   canvas.addEventListener("mousedown", startPainting);
@@ -23,6 +24,8 @@ function init() {
   for (const color of colors) {
     color.addEventListener("click", changeColor);
   }
+
+  brushRange.addEventListener("input", changeBrushSize);
 }
 
 function startPainting(e) {
@@ -53,4 +56,9 @@ function drawLine(e) {
 function changeColor(e) {
   const color = e.target.style.backgroundColor;
   ctx2D.strokeStyle = color;
+}
+
+function changeBrushSize(e) {
+  const value = e.target.value;
+  ctx2D.lineWidth = value;
 }
