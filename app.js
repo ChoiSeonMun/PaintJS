@@ -5,6 +5,10 @@ const brushRange = document.querySelector(".controls input");
 const fillButton = document.querySelector(
   ".controls__btns .controls__control:first-child"
 );
+const saveButton = document.querySelector(
+  ".controls__btns .controls__control:last-child"
+);
+
 const initialColor = "#2c2c2c";
 
 let isPainting = false;
@@ -31,6 +35,7 @@ function init() {
   brushRange.addEventListener("input", changeBrushSize);
 
   fillButton.addEventListener("click", fillCanvas);
+  saveButton.addEventListener("click", saveImage);
 }
 
 function startPainting(e) {
@@ -71,4 +76,11 @@ function changeBrushSize(e) {
 
 function fillCanvas(e) {
   ctx2D.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+function saveImage(e) {
+  const link = document.createElement("a");
+  link.href = canvas.toDataURL();
+  link.download = "PaintJS[🎨].png";
+  link.click();
 }
